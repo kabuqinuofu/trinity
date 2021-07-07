@@ -1,0 +1,119 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
+apply from: rootProject.file("secret.gradle")
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'bugly'
+
+bugly {
+    appId = 'c998b23a2d'
+    appKey = '6b89010f-1e5c-47ee-9def-182998f860b7'
+    debug = true
+}
+
+android {
+    compileSdkVersion 29
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 29
+        versionCode 1
+        versionName "0.2.9.1"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        externalNativeBuild {
+            cmake {
+                arguments "-DANDROID_ARM_NEON=TRUE", "-DANDROID_TOOLCHAIN=clang", "-DANDROID_STL=c++_shared"
+                cppFlags "-std=c++11"
+                abiFilters "armeabi-v7a", "arm64-v8a"
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    externalNativeBuild {
+        cmake {
+            version "3.10.2"
+            path "src/main/cpp/CMakeLists.txt"
+        }
+    }
+
+    publishNonDefault true
+}
+
+repositories {
+    maven { url "https://oss.jfrog.org/artifactory/oss-snapshot-local" }
+
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.alibaba.android.mnnkit:core:0.0.5'
+    implementation 'com.alibaba.android:mnn:0.0.4'
+    implementation 'com.alibaba.android.mnnkit:facedetection:0.0.5'
+    implementation 'com.alibaba.android.mnnkit:handgesturedetection:0.0.6'
+    implementation 'com.alibaba.android.mnnkit:portraitsegmentation:0.0.6'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
+
+//生成源文件
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+//生成Javadoc文档
+//task javadoc(type: Javadoc) {
+//    source = android.sourceSets.main.java.srcDirs
+//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+//}
+//
+////文档打包成jar
+//task javadocJar(type: Jar, dependsOn: javadoc) {
+//    classifier = 'javadoc'
+//    from javadoc.destinationDir
+//}
+//
+////拷贝javadoc文件
+//task copyDoc(type: Copy) {
+//    from "${buildDir}/docs/"
+//    into "docs"
+//}
+
+//上传到JCenter所需要的源码文件
+artifacts {
+//    archives javadocJar
+    archives sourcesJar
+}
+
+//解决 JavaDoc 中文注释生成失败的问题
+tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+}
+
+publish {
+    userOrg = 'wlanjie'
+    groupId = 'com.github.wlanjie'
+    artifactId = 'trinity'
+    publishVersion = '0.2.9.1'
+    desc = 'android short video sdk'
+    website = 'https://github.com/wlanjie/trinity'
+
+    bintrayUser = bintray_user
+    bintrayKey = bintray_key
+}

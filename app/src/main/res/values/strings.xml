@@ -1,0 +1,78 @@
+<resources>
+    <string name="app_name">trinity</string>
+
+    <string name="rate_very_slow">极慢</string>
+    <string name="rate_slow">慢</string>
+    <string name="rate_standard">标准</string>
+    <string name="rate_fast">快</string>
+    <string name="rate_very_fast">极快</string>
+
+    <string-array name="preview_render_preference">
+        <item>FIT</item>
+        <item>CROP</item>
+    </string-array>
+
+    <string-array name="preview_render_value_preference">
+        <item>"FIT"</item>
+        <item>"CROP"</item>
+    </string-array>
+
+    <string-array name="preview_resolution">
+        <item>1080P</item>
+        <item>720P</item>
+    </string-array>
+
+    <string-array name="record_resolution">
+        <item>1080P</item>
+        <item>720P</item>
+        <item>540P</item>
+        <item>480P</item>
+        <item>360P</item>
+    </string-array>
+
+    <string-array name="frame_rate">
+        <item>30</item>
+        <item>25</item>
+        <item>24</item>
+        <item>20</item>
+        <item>15</item>
+    </string-array>
+
+    <string-array name="channels">
+        <item>2</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="sample_rate">
+        <item>48000</item>
+        <item>44100</item>
+        <item>22050</item>
+    </string-array>
+
+    <string name="filter">滤镜</string>
+    <string name="music">音乐</string>
+    <string name="gif">动图</string>
+    <string name="subtitle">字幕</string>
+    <string name="mv">MV</string>
+    <string name="sound">音效</string>
+    <string name="effect">特效</string>
+    <string name="speed_time">变速</string>
+    <string name="transition">转场</string>
+    <string name="paint">涂鸦</string>
+    <string name="cover">封面</string>
+    <string name="smoother">磨皮</string>
+    <string name="effect_tip">选择位置后, 按住使用效果</string>
+    <string name="undo">撤消</string>
+    <string name="split_screen">分屏</string>
+    <string name="dream">梦幻</string>
+    <string name="dynamic">动感</string>
+
+    <string name="caption_effect_font_category_name">纯文字</string>
+    <string name="caption_effect_bottom_keyboard">键盘</string>
+    <string name="caption_effect_bottom_color">颜色</string>
+    <string name="caption_effect_bottom_font">字体</string>
+    <string name="caption_effect_bottom_animation">特效</string>
+    <string name="text_count_outof">字数超出限制</string>
+    <string name="subtitle_text_color">填充</string>
+    <string name="subtitle_text_stroke">描边</string>
+</resources>
